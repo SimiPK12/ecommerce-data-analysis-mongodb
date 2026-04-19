@@ -1,0 +1,28 @@
+{
+  "name": "ai-ecommerce-data-analysis",
+  "version": "1.0.0",
+  "description": "AI-based e-commerce data analysis system using MongoDB, Node.js, Express, and a web dashboard.",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "check": "node --check src/server.js",
+    "import:data": "node scripts/importCsvToMongo.js data/import-config.example.json",
+    "create:indexes": "node scripts/createIndexes.js"
+  },
+  "keywords": [
+    "mongodb",
+    "ecommerce",
+    "analytics",
+    "express",
+    "dashboard"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.7.0"
+  }
+}

@@ -1,0 +1,384 @@
+:root {
+  --bg: #f2ede4;
+  --bg-accent: #e1d4be;
+  --surface: rgba(255, 252, 247, 0.84);
+  --surface-strong: #fff9f0;
+  --line: rgba(70, 52, 31, 0.14);
+  --text: #1f1a17;
+  --muted: #5f554e;
+  --accent: #bf5a36;
+  --accent-dark: #8f3f22;
+  --success: #28705f;
+  --shadow: 0 20px 45px rgba(70, 52, 31, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(191, 90, 54, 0.18), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(40, 112, 95, 0.18), transparent 24%),
+    linear-gradient(135deg, var(--bg), #f8f2e8 45%, var(--bg-accent));
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(31, 26, 23, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 26, 23, 0.03) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+}
+
+.shell {
+  width: min(1280px, calc(100% - 32px));
+  margin: 32px auto;
+}
+
+.hero,
+.query-card,
+.results-section {
+  backdrop-filter: blur(14px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  padding: 32px;
+  border-radius: 28px;
+  overflow: hidden;
+  animation: fadeUp 0.7s ease;
+}
+
+.eyebrow,
+.panel-label,
+.card-index,
+.status-badge,
+pre {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.eyebrow,
+.panel-label,
+.card-index {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+  color: var(--accent-dark);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  margin-top: 10px;
+  font-size: clamp(2.4rem, 4vw, 4.7rem);
+  line-height: 0.95;
+  max-width: 11ch;
+}
+
+.lead {
+  margin-top: 18px;
+  max-width: 70ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.hero-stats div,
+.hero-panel {
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: rgba(255, 249, 240, 0.82);
+}
+
+.hero-stats div {
+  min-width: 180px;
+  padding: 18px;
+}
+
+.hero-stats span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.hero-stats p,
+.hero-panel li {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.hero-panel {
+  padding: 24px;
+  align-self: stretch;
+}
+
+.hero-panel ol {
+  padding-left: 20px;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 14px;
+}
+
+.dataset-copy {
+  margin-top: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 0.95fr 1.45fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.section-heading p {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.query-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.query-card,
+.results-section {
+  border-radius: 24px;
+}
+
+.query-card {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px;
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+  animation: fadeUp 0.7s ease;
+}
+
+.query-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(191, 90, 54, 0.35);
+}
+
+.query-card h3 {
+  margin-top: 10px;
+  font-size: 1.12rem;
+}
+
+.card-insight {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.ghost-button,
+.run-button {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.ghost-button:hover,
+.run-button:hover {
+  transform: translateY(-1px);
+}
+
+.ghost-button {
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(31, 26, 23, 0.06);
+  color: var(--text);
+}
+
+.run-button {
+  min-width: 114px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--accent);
+  color: #fff7ef;
+  font-weight: 700;
+}
+
+.run-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.results-section {
+  padding: 24px;
+  animation: fadeUp 0.85s ease;
+}
+
+.status-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-badge.idle {
+  background: rgba(31, 26, 23, 0.08);
+}
+
+.status-badge.loading {
+  color: #fff7ef;
+  background: var(--accent);
+}
+
+.status-badge.success {
+  color: #effcf7;
+  background: var(--success);
+}
+
+.status-badge.error {
+  color: #fff7ef;
+  background: #a43722;
+}
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface-strong);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.results-table th,
+.results-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.results-table th {
+  position: sticky;
+  top: 0;
+  background: #f8efe1;
+  font-size: 0.9rem;
+}
+
+.results-table td {
+  color: var(--muted);
+}
+
+.empty-state {
+  padding: 24px;
+  color: var(--muted);
+}
+
+.json-panel {
+  margin-top: 18px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: #221c17;
+  color: #f7efe4;
+  overflow: hidden;
+}
+
+.json-heading {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+pre {
+  margin: 0;
+  padding: 18px;
+  overflow: auto;
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(100% - 20px, 100%);
+    margin: 12px auto 24px;
+  }
+
+  .hero,
+  .results-section,
+  .query-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .query-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .run-button {
+    width: 100%;
+  }
+
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

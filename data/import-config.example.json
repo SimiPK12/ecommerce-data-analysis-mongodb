@@ -1,0 +1,88 @@
+{
+  "imports": [
+    {
+      "collection": "customers",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\olist_customers_dataset.csv",
+      "clearExisting": true,
+      "fieldTypes": {}
+    },
+    {
+      "collection": "geolocation",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\olist_geolocation_dataset.csv",
+      "clearExisting": true,
+      "fieldTypes": {
+        "geolocation_lat": "number",
+        "geolocation_lng": "number"
+      }
+    },
+    {
+      "collection": "order_items",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\olist_order_items_dataset.csv",
+      "clearExisting": true,
+      "fieldTypes": {
+        "order_item_id": "number",
+        "shipping_limit_date": "date",
+        "price": "number",
+        "freight_value": "number"
+      }
+    },
+    {
+      "collection": "order_payments",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\olist_order_payments_dataset.csv",
+      "clearExisting": true,
+      "fieldTypes": {
+        "payment_sequential": "number",
+        "payment_installments": "number",
+        "payment_value": "number"
+      }
+    },
+    {
+      "collection": "order_reviews",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\olist_order_reviews_dataset.csv",
+      "clearExisting": true,
+      "fieldTypes": {
+        "review_score": "number",
+        "review_creation_date": "date",
+        "review_answer_timestamp": "date"
+      }
+    },
+    {
+      "collection": "orders",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\olist_orders_dataset.csv",
+      "clearExisting": true,
+      "fieldTypes": {
+        "order_purchase_timestamp": "date",
+        "order_approved_at": "date",
+        "order_delivered_carrier_date": "date",
+        "order_delivered_customer_date": "date",
+        "order_estimated_delivery_date": "date"
+      }
+    },
+    {
+      "collection": "products",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\olist_products_dataset.csv",
+      "clearExisting": true,
+      "fieldTypes": {
+        "product_name_lenght": "number",
+        "product_description_lenght": "number",
+        "product_photos_qty": "number",
+        "product_weight_g": "number",
+        "product_length_cm": "number",
+        "product_height_cm": "number",
+        "product_width_cm": "number"
+      }
+    },
+    {
+      "collection": "sellers",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\olist_sellers_dataset.csv",
+      "clearExisting": true,
+      "fieldTypes": {}
+    },
+    {
+      "collection": "category_translations",
+      "file": "C:\\Users\\bhagy\\OneDrive\\Desktop\\6 SEM\\BDA Project\\archive (3)\\product_category_name_translation.csv",
+      "clearExisting": true,
+      "fieldTypes": {}
+    }
+  ]
+}

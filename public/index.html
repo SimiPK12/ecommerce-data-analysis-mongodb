@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI-Based E-Commerce Data Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">MongoDB Analytics Dashboard</p>
+          <h1>E-commerce data analysis</h1>
+          <p class="lead">
+            Explore customer behavior, product performance, sales trends, payments,
+            reviews, and delivery insights through one-click aggregation queries.
+          </p>
+          <div class="hero-stats">
+            <div>
+              <span>10</span>
+              <p>Predefined analytics modules</p>
+            </div>
+            <div>
+              <span>MongoDB</span>
+              <p>Aggregation-driven business insights</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <p class="panel-label">Dataset Brief</p>
+          <p class="dataset-copy">
+            This dashboard is built on the Olist Brazilian e-commerce dataset from
+            Kaggle. It combines customers, orders, order items, payments, reviews,
+            products, sellers, geolocation, and category translation data to uncover
+            patterns in buyer behavior, revenue, logistics, and product performance.
+          </p>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="query-section">
+          <div class="section-heading">
+            <h2>Analysis Modules</h2>
+            <button id="refreshQueries" class="ghost-button">Refresh Modules</button>
+          </div>
+          <div id="queryGrid" class="query-grid"></div>
+        </section>
+
+        <section class="results-section">
+          <div class="section-heading">
+            <div>
+              <h2 id="resultTitle">Results</h2>
+              <p id="resultInsight">Run any analysis module to inspect insights.</p>
+            </div>
+            <span id="statusBadge" class="status-badge idle">Idle</span>
+          </div>
+
+          <div id="tableWrap" class="table-wrap">
+            <table id="resultsTable" class="results-table"></table>
+          </div>
+
+          <div class="json-panel">
+            <div class="json-heading">
+              <h3>Raw JSON Output</h3>
+            </div>
+            <pre id="jsonOutput">No query executed yet.</pre>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="queryCardTemplate">
+      <article class="query-card">
+        <div>
+          <p class="card-index"></p>
+          <h3></h3>
+          <p class="card-insight"></p>
+        </div>
+        <button class="run-button">Run Query</button>
+      </article>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
