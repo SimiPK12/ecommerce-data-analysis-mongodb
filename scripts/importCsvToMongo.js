@@ -39,6 +39,12 @@ function transformRecord(record, fieldTypes = {}) {
   );
 }
 
+function sanitizeColumns(record) {
+  return Object.fromEntries(
+    Object.entries(record).map(([key, value]) => [key.replace(/^\uFEFF/, ""), value])
+  );
+}
+
 async function importCollection(db, entry, rootDir) {
   const filePath = path.isAbsolute(entry.file)
     ? entry.file
@@ -50,7 +56,7 @@ async function importCollection(db, entry, rootDir) {
     trim: true
   });
   const transformedRecords = records.map((record) =>
-    transformRecord(record, entry.fieldTypes)
+    transformRecord(sanitizeColumns(record), entry.fieldTypes)
   );
   const collection = db.collection(entry.collection);
 

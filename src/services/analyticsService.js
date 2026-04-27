@@ -25,6 +25,8 @@ const COLLECTIONS = {
   categoryTranslations: getCollection(ENTITY.categoryTranslations)
 };
 
+const LEGACY_TRANSLATION_CATEGORY_FIELD = "\uFEFFproduct_category_name";
+
 function lookupFirstValue(arrayPath, fieldName, fallback = "Unknown") {
   return {
     $ifNull: [{ $arrayElemAt: [`$${arrayPath}.${fieldName}`, 0] }, fallback]
@@ -46,6 +48,35 @@ function itemVariableRevenueExpression(variableName = "item") {
       { $ifNull: [`$$${variableName}.${getField(ENTITY.orderItems, "price")}`, 0] },
       { $ifNull: [`$$${variableName}.${getField(ENTITY.orderItems, "freightValue")}`, 0] }
     ]
+  };
+}
+
+function translationLookupStage(localCategoryExpression) {
+  return {
+    $lookup: {
+      from: COLLECTIONS.categoryTranslations,
+      let: { localCategory: localCategoryExpression },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $or: [
+                {
+                  $eq: [
+                    `$${getField(ENTITY.categoryTranslations, "categoryName")}`,
+                    "$$localCategory"
+                  ]
+                },
+                {
+                  $eq: [`$${LEGACY_TRANSLATION_CATEGORY_FIELD}`, "$$localCategory"]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      as: "translation"
+    }
   };
 }
 
@@ -132,19 +163,13 @@ const queryDefinitions = {
           as: "product"
         }
       },
-      {
-        $lookup: {
-          from: COLLECTIONS.categoryTranslations,
-          localField: `product.${getField(ENTITY.products, "categoryName")}`,
-          foreignField: getField(ENTITY.categoryTranslations, "categoryName"),
-          as: "translation"
-        }
-      },
+      { $unwind: "$product" },
+      translationLookupStage(`$product.${getField(ENTITY.products, "categoryName")}`),
       {
         $project: {
           _id: 0,
           productId: "$_id",
-          category: lookupFirstValue("product", getField(ENTITY.products, "categoryName")),
+          category: `$product.${getField(ENTITY.products, "categoryName")}`,
           categoryEnglish: lookupFirstValue(
             "translation",
             getField(ENTITY.categoryTranslations, "categoryEnglishName")
@@ -322,19 +347,13 @@ const queryDefinitions = {
           as: "product"
         }
       },
-      {
-        $lookup: {
-          from: COLLECTIONS.categoryTranslations,
-          localField: `product.${getField(ENTITY.products, "categoryName")}`,
-          foreignField: getField(ENTITY.categoryTranslations, "categoryName"),
-          as: "translation"
-        }
-      },
+      { $unwind: "$product" },
+      translationLookupStage(`$product.${getField(ENTITY.products, "categoryName")}`),
       {
         $project: {
           _id: 0,
           productId: "$_id",
-          category: lookupFirstValue("product", getField(ENTITY.products, "categoryName")),
+          category: `$product.${getField(ENTITY.products, "categoryName")}`,
           categoryEnglish: lookupFirstValue(
             "translation",
             getField(ENTITY.categoryTranslations, "categoryEnglishName")
@@ -361,16 +380,14 @@ const queryDefinitions = {
       },
       { $unwind: "$product" },
       {
-        $lookup: {
-          from: COLLECTIONS.categoryTranslations,
-          localField: `product.${getField(ENTITY.products, "categoryName")}`,
-          foreignField: getField(ENTITY.categoryTranslations, "categoryName"),
-          as: "translation"
+        $addFields: {
+          categoryName: `$product.${getField(ENTITY.products, "categoryName")}`
         }
       },
+      translationLookupStage("$categoryName"),
       {
         $group: {
-          _id: `$product.${getField(ENTITY.products, "categoryName")}`,
+          _id: "$categoryName",
           categoryEnglish: {
             $first: lookupFirstValue(
               "translation",
